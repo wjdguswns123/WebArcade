@@ -1,17 +1,16 @@
 import React from 'react'
 
-const GameInfoPopup = ({ data, onClose, onStartGame }: {data: string, onClose: () => void, onStartGame: () => void}) => {
+const GamePopup = ({title, onClose}: {title: string, onClose: () => void}) => {
   return (
     <div style={{
       position: "fixed",
-      top: "100px",
-      left: "100px",
-      width: "200px",
-      height: "180px",
+      top: "10px",
+      left: "10px",
+      width: "90vw",
+      height: "90vh",
       backgroundColor: "#eee",
       border: "2px solid #333"
-    }}>
-      <div>{data}</div>
+    }}>{title}
       <button onClick={() => {onClose()}} style={{
         width: "30px",
         height: "30px",
@@ -25,9 +24,8 @@ const GameInfoPopup = ({ data, onClose, onStartGame }: {data: string, onClose: (
           height: "100%"
         }} />
       </button>
-      <button onClick={() => {onStartGame()}}>{"시작"}</button>
     </div>
   )
 }
 
-export default GameInfoPopup;
+export default GamePopup
