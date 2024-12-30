@@ -1,0 +1,5 @@
+.game-popup-background { position: fixed; top: 10px; left: 10px; width: 90vw; height: 90vh; background-color: #eee; border: 2px solid #333; }
+
+.game-popup-background button { width: 30px; height: 30px; position: absolute; top: 2px; right: 2px; padding: 0; }
+
+.game-popup-background button img { width: 100%; height: 100%; }

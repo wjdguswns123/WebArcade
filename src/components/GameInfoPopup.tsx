@@ -1,29 +1,12 @@
-import React from 'react'
+import React from 'react';
+import '../css/GameInfoPopup.css';
 
 const GameInfoPopup = ({ data, onClose, onStartGame }: {data: string, onClose: () => void, onStartGame: () => void}) => {
   return (
-    <div style={{
-      position: "fixed",
-      top: "100px",
-      left: "100px",
-      width: "200px",
-      height: "180px",
-      backgroundColor: "#eee",
-      border: "2px solid #333"
-    }}>
+    <div className="game-info-popup-background">
       <div>{data}</div>
-      <button onClick={() => {onClose()}} style={{
-        width: "30px",
-        height: "30px",
-        position: "absolute",
-        top: "2px",
-        right: "2px",
-        padding: "0"
-      }}>
-        <img src="/Images/Icons/icon_close.png" alt="" style={{
-          width: "100%",
-          height: "100%"
-        }} />
+      <button className="close-Button" onClick={() => {onClose()}}>
+        <img src="/Images/Icons/icon_close.png" alt="" />
       </button>
       <button onClick={() => {onStartGame()}}>{"시작"}</button>
     </div>
