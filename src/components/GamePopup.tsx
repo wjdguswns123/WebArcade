@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Unity, useUnityContext } from "react-unity-webgl";
+import { GameInfo } from "../resources/gameInfo";
 import '../css/GamePopup.css';
 
-const GamePopup = ({title, onClose}: {title: string, onClose: () => void}) => {
+interface GamePopupProps {
+  data: GameInfo;
+  onClose: () => void;
+}
+
+const GamePopup:React.FC<GamePopupProps> = ({data, onClose}) => {
+  const { unityProvider, addEventListener, removeEventListener } = useUnityContext({
+    loaderUrl: `${data.buildPath}.loader.js`,
+    dataUrl: `${data.buildPath}.data.unityweb`,
+    frameworkUrl: `${data.buildPath}.framework.js.unityweb`,
+    codeUrl: `${data.buildPath}.wasm.unityweb`,
+  });
+
+  const exitGame = () => {
+    onClose();
+  };
+
+  useEffect(() => {
+      addEventListener("ExitGame", exitGame);
+  
+      return () => {
+        removeEventListener("ExitGame", exitGame);
+      };
+    }, [addEventListener, removeEventListener, exitGame]);
+
   return (
     <div className="game-popup-background">
-      {title}
-      <button onClick={() => {onClose()}}>
-        <img src="/Images/Icons/icon_close.png" alt="" />
-      </button>
+      <div className="titleBar">
+        <p>{data.name}</p>
+        <button onClick={() => {onClose()}}>
+          <img src="/Images/Icons/icon_close.png" alt="" />
+        </button>
+      </div>
+      
+      <Unity unityProvider={unityProvider}
+        style={{ width: "90%", height: "90%" }}/>
     </div>
   )
 }
