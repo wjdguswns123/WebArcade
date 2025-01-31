@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Unity, useUnityContext } from "react-unity-webgl";
 import GameInfoPopup from './components/GameInfoPopup';
 import GamePopup from './components/GamePopup';
-import { GameInfo, gameInfos } from './resources/gameInfo';
+import { GameInfo, gameInfos, loadGameInfo } from './resources/gameInfo';
 import './App.css';
 
 function App() {
@@ -17,6 +17,8 @@ function App() {
     codeUrl: "Build/Output.wasm.unityweb",
   });
 
+  loadGameInfo();
+  
   const showGameInfoPopup = useCallback((data: number) => {
     const info = gameInfos.find(i => i.id === data);
     setIsShowGameInfoPopup(true);
