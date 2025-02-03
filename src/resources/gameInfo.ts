@@ -4,6 +4,7 @@ export interface GameInfo {
   name: string,
   description: string,
   buildPath: string,
+  isLandscape: boolean
 }
 
 // // 임시 게임 정보 배열.
@@ -38,7 +39,8 @@ export const loadGameInfo = () => {
             id: Number.parseInt(datas[0]),
             name: datas[1],
             description: datas[2],
-            buildPath: datas[3]
+            buildPath: datas[3],
+            isLandscape: JSON.parse(datas[4])
           };
 
           if(gameInfos.find(i => i.id === data.id) === undefined) {

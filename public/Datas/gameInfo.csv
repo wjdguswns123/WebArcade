@@ -1,3 +1,3 @@
-﻿id,name,description,buildPath
-1,테스트 게임 11,테스트 게임 11 입니다.,Build/TestGame1/TestGame1
-2,테스트 게임 22,테스트 게임 22 입니다.,Build/TestGame2/TestGame2
+﻿id,name,description,buildPath,isLandscape
+1,나의 행성을 지켜줘,외계 침입자로부터 우리의 행성을 지켜주세요.,Build/MyEarth/MyEarth,false
+2,테스트 게임 22,테스트 게임 22 입니다.,Build/TestGame2/TestGame2,true
