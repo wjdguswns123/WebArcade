@@ -21,28 +21,29 @@ const GamePopup:React.FC<GamePopupProps> = ({data, onClose}) => {
   };
 
   useEffect(() => {
-      addEventListener("CloseGamePopup", exitGame);
-  
-      return () => {
-        removeEventListener("CloseGamePopup", exitGame);
-      };
-    }, [addEventListener, removeEventListener, exitGame]);
+    addEventListener("CloseGamePopup", exitGame);
+
+    return () => {
+      removeEventListener("CloseGamePopup", exitGame);
+    };
+  }, [addEventListener, removeEventListener, exitGame]);
+
+  const getWidth = () => {
+    const width = data.isLandscape ? 80 * 1.78 : 80 * 0.5625;
+    return `${width}vh`;
+  };
 
   return (
     <div className="game-popup-background">
-      <div className="titleBar">
-        <p>{data.name}</p>
-        <button onClick={() => {
+      <button className="close-Button" onClick={() => {
           sendMessage("GameManager", "ReceiveExitGame");
         }}>
-          <img src="/Images/Icons/icon_close.png" alt="" />
-        </button>
-      </div>
+        <img src="/Images/Icons/icon_close.png" alt="" />
+      </button>
+      <p className="title">{data.name}</p>
       
-      <Unity unityProvider={unityProvider}
-        style={data.isLandscape 
-          ? { width: "90%", height: "90%" } 
-          : { width: "50.625%", height: "90%" }}/>
+      <Unity className="game-canvas" unityProvider={unityProvider}
+        style={{ width: getWidth(), height: "80vh" }}/>
     </div>
   )
 }

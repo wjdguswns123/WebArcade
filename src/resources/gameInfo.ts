@@ -4,7 +4,8 @@ export interface GameInfo {
   name: string,
   description: string,
   buildPath: string,
-  isLandscape: boolean
+  isLandscape: boolean,
+  screenShots: string[]
 }
 
 // // 임시 게임 정보 배열.
@@ -35,12 +36,23 @@ export const loadGameInfo = () => {
       for(let i = 1; i < lows.length; ++i) {
         if(lows[i] !== "") {
           const datas = lows[i].split(",");
+          const screenShotArr: string[] = [];
+          if(datas[5]) {
+            screenShotArr.push(datas[5]);
+          }
+          if(datas[6]) {
+            screenShotArr.push(datas[6]);
+          }
+          if(datas[7]) {
+            screenShotArr.push(datas[7]);
+          }
           const data: GameInfo = {
             id: Number.parseInt(datas[0]),
             name: datas[1],
             description: datas[2],
             buildPath: datas[3],
-            isLandscape: JSON.parse(datas[4])
+            isLandscape: JSON.parse(datas[4]),
+            screenShots: screenShotArr
           };
 
           if(gameInfos.find(i => i.id === data.id) === undefined) {

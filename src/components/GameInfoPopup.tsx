@@ -9,17 +9,33 @@ interface GameInfoPopupProps {
 }
 
 const GameInfoPopup:React.FC<GameInfoPopupProps> = ({ data, onClose, onStartGame }) => {
+  const drawScreenShots = () => {
+    return (
+      <div className="screenshots">
+        {
+          data.screenShots.map((res) => {
+            const path = "Images/ScreenShots/" + res;
+            return (
+              <img src={path} alt="" />
+            );
+          })
+        }
+      </div>
+    );
+  };
+
   return (
     <div className="game-info-popup-background">
-      <div className="titleBar">
-        <p>{data.name}</p>
-        <p>{data.description}</p>
-        <button className="close-Button" onClick={onClose}>
-          <img src="/Images/Icons/icon_close.png" alt="" />
-        </button>
-      </div>
+      <button className="close-Button" onClick={onClose}>
+        <img src="/Images/Icons/icon_close.png" alt="" />
+      </button>
+
+      <p className="title">{data.name}</p>
+      <p className="description">{data.description}</p>
       
-      <button onClick={onStartGame}>{"시작"}</button>
+      {drawScreenShots()}
+      
+      <button className="start-button" onClick={onStartGame}>{"게임 시작"}</button>
     </div>
   )
 }

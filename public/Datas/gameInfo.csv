@@ -1,3 +1,3 @@
-﻿id,name,description,buildPath,isLandscape
-1,나의 행성을 지켜줘,외계 침입자로부터 우리의 행성을 지켜주세요.,Build/MyEarth/MyEarth,false
-2,테스트 게임 22,테스트 게임 22 입니다.,Build/TestGame2/TestGame2,true
+﻿id,name,description,buildPath,isLandscape,screenShot1,screenShot2,screenShot3
+1,나의 행성을 지켜줘,외계 침입자로부터 우리의 행성을 지켜주세요.,Build/MyEarth/MyEarth,false,MyEarth/myEarth_0.png,MyEarth/myEarth_2.png
+2,테스트 게임 22,테스트 게임 22 입니다.,Build/TestGame2/TestGame2,true,Test/test_0.png
