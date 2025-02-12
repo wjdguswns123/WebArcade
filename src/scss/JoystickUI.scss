@@ -1,0 +1,49 @@
+.joystick {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+
+  .arrow-button {
+    width: 50px;
+    height: 40px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    text-align: center;
+    align-content: center;
+    position: absolute;
+    cursor: pointer;
+
+    &:active {
+      background-color: #aaaaaa;
+    }
+
+    @mixin arrow-image($deg) {
+      .arrow-img {
+        width: 80%;
+        height: 80%;
+        transform: rotateZ($deg);
+      }
+    }
+
+    &.up-arrow {
+      right: 70px;
+      bottom: 60px;
+      @include arrow-image(0deg);
+    }
+    &.left-arrow {
+      right: 130px;
+      bottom: 10px;
+      @include arrow-image(270deg);
+    }
+    &.right-arrow {
+      right: 10px;
+      bottom: 10px;
+      @include arrow-image(90deg);
+    }
+    &.down-arrow {
+      right: 70px;
+      bottom: 10px;
+      @include arrow-image(180deg);
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.joystick { position: absolute; right: 20px; bottom: 20px; }
+
+.joystick .arrow-button { width: 50px; height: 40px; border: 1px solid #000; border-radius: 3px; text-align: center; align-content: center; position: absolute; cursor: pointer; }
+
+.joystick .arrow-button:active { background-color: #aaaaaa; }
+
+.joystick .arrow-button.up-arrow { right: 70px; bottom: 60px; }
+
+.joystick .arrow-button.up-arrow .arrow-img { width: 80%; height: 80%; transform: rotateZ(0deg); }
+
+.joystick .arrow-button.left-arrow { right: 130px; bottom: 10px; }
+
+.joystick .arrow-button.left-arrow .arrow-img { width: 80%; height: 80%; transform: rotateZ(270deg); }
+
+.joystick .arrow-button.right-arrow { right: 10px; bottom: 10px; }
+
+.joystick .arrow-button.right-arrow .arrow-img { width: 80%; height: 80%; transform: rotateZ(90deg); }
+
+.joystick .arrow-button.down-arrow { right: 70px; bottom: 10px; }
+
+.joystick .arrow-button.down-arrow .arrow-img { width: 80%; height: 80%; transform: rotateZ(180deg); }
