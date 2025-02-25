@@ -24,6 +24,17 @@ export interface GameInfo {
 //   },
 // ];
 
+export const getInitGameInfo = () => {
+  return {
+    id: 0,
+    name: "",
+    description: "",
+    buildPath: "",
+    isLandscape: true,
+    screenShots: []
+  };
+};
+
 export let gameInfos: GameInfo[] =[];
 
 export const loadGameInfo = () => {

@@ -2,7 +2,7 @@
 
 .joystick .arrow-button { width: 50px; height: 40px; border: 1px solid #000; border-radius: 3px; text-align: center; align-content: center; position: absolute; cursor: pointer; }
 
-.joystick .arrow-button:active { background-color: #aaaaaa; }
+.joystick .arrow-button:active { background-color: #aaaaaa; transform: scale(1.1); transition: transform 0.1s; }
 
 .joystick .arrow-button.up-arrow { right: 70px; bottom: 60px; }
 
