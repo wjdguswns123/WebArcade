@@ -55,32 +55,26 @@ function App() {
   // };
 
   const onUpMoveStart = () => {
-    console.log("위로 이동 시작");
     setMoveState(1);
   };
 
   const onUpMoveEnd = () => {
-    console.log("위로 이동 끝");
     setMoveState(0);
   };
 
   const onDownMoveStart = () => {
-    console.log("아래로");
     setMoveState(-1);
   };
 
   const onDownMoveEnd = () => {
-    console.log("아래로");
     setMoveState(0);
   };
 
   const onLeftKeyStart = () => {
-    console.log("왼쪽으로");
     setRotateState(1);
   };
 
   const onRightKeyStart = () => {
-    console.log("오른쪽으으로");
     setRotateState(-1);
   };
 

@@ -1,7 +1,9 @@
 import { OrthographicCamera } from '@react-three/drei';
-import { Canvas, Vector3 } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
+import { Physics, RigidBody } from '@react-three/rapier';
 import React from 'react';
 import Player from './Player';
+import ArcadeConsole from './ArcadeConsole';
 
 interface ArcadeCanvasProps {
   move: number;
@@ -15,19 +17,12 @@ const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({move, rotate}) => {
 
   const drawFloor = () => {
     return (
-      <mesh receiveShadow rotation={[degToRad(-90), 0, 0]}>
-        <planeGeometry args={[50, 50]} />
-        <meshStandardMaterial color="#7D7D7D" />
-      </mesh>
-    );
-  };
-
-  const drawArcadeConsole = (pos: Vector3) => {
-    return (
-      <mesh castShadow position={pos} >
-        <boxGeometry args={[4, 6, 3]} />
-        <meshStandardMaterial color="#9BF7FF" />
-      </mesh>
+      <RigidBody>
+        <mesh receiveShadow rotation={[degToRad(-90), 0, 0]}>
+          <planeGeometry args={[50, 50]} />
+          <meshStandardMaterial color="#7D7D7D" />
+        </mesh>
+      </RigidBody>
     );
   };
 
@@ -54,12 +49,14 @@ const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({move, rotate}) => {
         rotation={[0, degToRad(30), degToRad(30)]} 
         args={["#ffffff", 3]}
       />
-      <group rotation={[0, 0, 0]}>
-        {drawFloor()}
-        {drawArcadeConsole([0, 3, -5])}
-        {drawArcadeConsole([6, 3, -5])}
-        <Player move={move} rotate={rotate} />
-      </group>
+      <Physics debug>
+        <group rotation={[0, 0, 0]}>
+          {drawFloor()}
+          <ArcadeConsole pos={[0, 3, -5]} />
+          <ArcadeConsole pos={[6, 3, -5]} />
+          <Player move={move} rotate={rotate} />
+        </group>
+      </Physics>
     </Canvas>
   )
 }
