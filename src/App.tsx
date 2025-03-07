@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Unity, useUnityContext } from "react-unity-webgl";
+import React, { useState, useCallback } from 'react';
 import ArcadeCanvas from './components/Arcades/ArcadeCanvas';
 import GameInfoPopup from './components/GameInfoPopup';
 import GamePopup from './components/GamePopup';
@@ -15,17 +14,10 @@ function App() {
   const [moveState, setMoveState] = useState<number>(0);
   const [rotateState, setRotateState] = useState<number>(0);
 
-  const { unityProvider, addEventListener, removeEventListener } = useUnityContext({
-    loaderUrl: "Build/Output.loader.js",
-    dataUrl: "Build/Output.data.unityweb",
-    frameworkUrl: "Build/Output.framework.js.unityweb",
-    codeUrl: "Build/Output.wasm.unityweb",
-  });
-
   loadGameInfo();
   
-  const showGameInfoPopup = useCallback((data: number) => {
-    const info = gameInfos.find(i => i.id === data);
+  const showGameInfoPopup = useCallback((gameId: number) => {
+    const info = gameInfos.find(i => i.id === gameId);
     setIsShowGameInfoPopup(true);
     setCurrentGameInfo(info ? info : getInitGameInfo);
   }, []);
@@ -39,20 +31,6 @@ function App() {
     setIsShowGameInfoPopup(false);
     setIsPlayingGame(true);
   }, []);
-
-  // useEffect(() => {
-  //   addEventListener("ShowGameInfoPage", showGameInfoPopup);
-  //   addEventListener("CloseGameInfoPage", closeGameInfoPopup);
-
-  //   return () => {
-  //     removeEventListener("ShowGameInfoPage", showGameInfoPopup);
-  //     removeEventListener("CloseGameInfoPage", closeGameInfoPopup);
-  //   };
-  // }, [addEventListener, removeEventListener, showGameInfoPopup, closeGameInfoPopup]);
-
-  // const setMovePlayer = () => {
-  //   console.log(upSpeed);
-  // };
 
   const onUpMoveStart = () => {
     setMoveState(1);
@@ -84,9 +62,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Unity unityProvider={unityProvider}
-        style={{ width: "100vw", height: "100vh" }}/> */}
-      <ArcadeCanvas move={moveState} rotate={rotateState} />
+      <ArcadeCanvas move={moveState} rotate={rotateState} onShowGameInfoPopup={showGameInfoPopup} onCloseGameInfoPopup={closeGameInfoPopup} />
       {isShowGameInfoPopup && 
         <div>
           <GameInfoPopup data={currentGameInfo} onClose={closeGameInfoPopup} onStartGame={startGame} />

@@ -8,9 +8,11 @@ import ArcadeConsole from './ArcadeConsole';
 interface ArcadeCanvasProps {
   move: number;
   rotate: number;
+  onShowGameInfoPopup: (gameId: number) => void;
+  onCloseGameInfoPopup: () => void;
 }
 
-const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({move, rotate}) => {
+const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({move, rotate, onShowGameInfoPopup, onCloseGameInfoPopup}) => {
   const degToRad = (deg: number) => {
     return (Math.PI / 180) * deg;
   };
@@ -28,7 +30,7 @@ const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({move, rotate}) => {
 
   return (
     <Canvas shadows style={{width: "100vw", height: "100vh"}}>
-      <axesHelper args={[10]} />
+      {/* <axesHelper args={[10]} /> */}
       <group rotation={[0, degToRad(-45), 0]}>
         <OrthographicCamera makeDefault 
           near={0.1} 
@@ -49,11 +51,11 @@ const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({move, rotate}) => {
         rotation={[0, degToRad(30), degToRad(30)]} 
         args={["#ffffff", 3]}
       />
-      <Physics debug>
+      <Physics>
         <group rotation={[0, 0, 0]}>
           {drawFloor()}
-          <ArcadeConsole pos={[0, 3, -5]} />
-          <ArcadeConsole pos={[6, 3, -5]} />
+          <ArcadeConsole gameId={1} pos={[0, 3, -5]} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
+          <ArcadeConsole gameId={2} pos={[6, 3, -5]} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
           <Player move={move} rotate={rotate} />
         </group>
       </Physics>

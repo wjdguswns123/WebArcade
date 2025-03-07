@@ -57,7 +57,7 @@ const Player:React.FC<PlayerProps> = ({move, rotate}) => {
   }, []);
 
   return (
-    <group position={[0, 2, 0]} >
+    <group position={[0, 2, 2]} >
       <RigidBody colliders={false} ref={playerRef} >
         <CylinderCollider args={[1, 1]} position={[0, -1, 0]} onCollisionEnter={() => {console.log("오락기 충돌돌");}} />
         <mesh castShadow >
