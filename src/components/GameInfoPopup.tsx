@@ -13,10 +13,10 @@ const GameInfoPopup:React.FC<GameInfoPopupProps> = ({ data, onClose, onStartGame
     return (
       <div className="screenshots">
         {
-          data.screenShots.map((res) => {
+          data.screenShots.map((res, index) => {
             const path = "Images/ScreenShots/" + res;
             return (
-              <img src={path} alt="" />
+              <img key={index} src={path} alt="" />
             );
           })
         }

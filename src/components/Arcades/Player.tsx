@@ -1,27 +1,28 @@
+import { useKeyboardControls } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { CylinderCollider, RapierRigidBody, RigidBody } from '@react-three/rapier';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { InputTypes, useInputStateStore } from '../../stores/InputStateStore';
 
 interface PlayerProps {
-  move: number;
-  rotate: number;
+  onShowGameInfoPopup: () => void;
 }
 
 const MOVE_SPEED = 10;
 const ROTATE_SPEED = 5;
 
-const Player:React.FC<PlayerProps> = ({move, rotate}) => {
-  const [isMove, setIsMove] = useState<number>(0);
-  const [isRotate, setIsRotate] = useState<number>(0);
-
+const Player:React.FC<PlayerProps> = ({onShowGameInfoPopup}) => {
   const playerRef = useRef<RapierRigidBody>(null);
-  const pressedKeys = useRef<Record<string, boolean>>({});
+
+  const [sub] = useKeyboardControls<InputTypes>();
+
+  const { forward, backward, left, right, setInput } = useInputStateStore();
 
   useFrame(() => {
     if(playerRef && playerRef.current) {
-      const moveValue = isMove !== 0 ? isMove : (move !== 0 ? move : 0);
-      const rotateValue = isRotate !== 0 ? isRotate : (rotate !== 0 ? rotate : 0);
+      const moveValue = (forward ? 1 : 0) + (backward ? -1 : 0);
+      const rotateValue = (left ? 1 : 0) + (right ? -1 : 0);
 
       const direction = new THREE.Vector3(0, 0, 1).applyQuaternion(playerRef.current.rotation());
 
@@ -30,36 +31,27 @@ const Player:React.FC<PlayerProps> = ({move, rotate}) => {
     }
   });
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if(!pressedKeys.current[e.key]) {
-      pressedKeys.current[e.key] = true;
-    }
-    
-    setIsMove((pressedKeys.current["ArrowUp"] ? 1 : 0) + (pressedKeys.current["ArrowDown"] ? -1 : 0));
-    setIsRotate((pressedKeys.current["ArrowLeft"] ? 1 : 0) + (pressedKeys.current["ArrowRight"] ? -1 : 0));
-  };
-
-  const handleKeyUp = (e: KeyboardEvent) => {
-    delete pressedKeys.current[e.key];
-
-    setIsMove((pressedKeys.current["ArrowUp"] ? 1 : 0) + (pressedKeys.current["ArrowDown"] ? -1 : 0));
-    setIsRotate((pressedKeys.current["ArrowLeft"] ? 1 : 0) + (pressedKeys.current["ArrowRight"] ? -1 : 0));
-  };
-
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
+    return sub((state) => {
+      if(state.forward) setInput("forward", true);
+      if(state.backward) setInput("backward", true);
+      if(state.left) setInput("left", true);
+      if(state.right) setInput("right", true);
+      if(state.space) {
+        onShowGameInfoPopup();
+      }
 
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-    };
+      if(!state.forward) setInput("forward", false);
+      if(!state.backward) setInput("backward", false);
+      if(!state.left) setInput("left", false);
+      if(!state.right) setInput("right", false);
+    });
   }, []);
 
   return (
     <group position={[0, 2, 2]} >
       <RigidBody colliders={false} ref={playerRef} >
-        <CylinderCollider args={[1, 1]} position={[0, -1, 0]} onCollisionEnter={() => {console.log("오락기 충돌돌");}} />
+        <CylinderCollider args={[1, 1]} position={[0, -1, 0]} />
         <mesh castShadow >
           <capsuleGeometry args={[1, 2]} />
           <meshStandardMaterial color="#00ffff" />

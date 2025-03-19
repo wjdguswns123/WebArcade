@@ -1,53 +1,45 @@
 import React from 'react';
 import '../css/JoystickUI.css';
+import { useInputStateStore } from '../stores/InputStateStore';
 
-interface JoystickUIProps {
-  onUpMoveStart: () => void;
-  onUpMoveEnd: () => void;
-  onDownMoveStart: () => void;
-  onDownMoveEnd: () => void;
-  onLeftKeyStart: () => void;
-  onLeftKeyEnd: () => void;
-  onRightKeyStart: () => void;
-  onRightKeyEnd: () => void;
-}
+const JoystickUI = () => {
+  const { setInput } = useInputStateStore();
 
-const JoystickUI:React.FC<JoystickUIProps> = ({onUpMoveStart, onUpMoveEnd, onDownMoveStart, onDownMoveEnd, onLeftKeyStart, onLeftKeyEnd, onRightKeyStart, onRightKeyEnd}) => {
   return (
     <div className="joystick">
-      <div className="arrow-button up-arrow" 
-        onMouseDown={onUpMoveStart} 
-        onMouseUp={onUpMoveEnd} 
-        onMouseLeave={onUpMoveEnd}
-        onTouchStart={onUpMoveStart}
-        onTouchEnd={onUpMoveEnd}
+      <div className="arrow-button up-arrow"
+        onMouseDown={() => { setInput("forward", true); }} 
+        onMouseUp={() => { setInput("forward", false); }}
+        onMouseLeave={() => { setInput("forward", false); }}
+        onTouchStart={() => { setInput("forward", true); }}
+        onTouchEnd={() => { setInput("forward", false); }}
       >
         <img className="arrow-img" src="Images/Icons/arrow.png" alt="" />
       </div>
       <div className="arrow-button left-arrow" 
-        onMouseDown={onLeftKeyStart} 
-        onMouseUp={onLeftKeyEnd} 
-        onMouseLeave={onLeftKeyEnd}
-        onTouchStart={onLeftKeyStart}
-        onTouchEnd={onLeftKeyEnd}
+        onMouseDown={() => { setInput("left", true); }} 
+        onMouseUp={() => { setInput("left", false); }}
+        onMouseLeave={() => { setInput("left", false); }}
+        onTouchStart={() => { setInput("left", true); }}
+        onTouchEnd={() => { setInput("left", false); }}
       >
         <img className="arrow-img" src="Images/Icons/arrow.png" alt="" />
       </div>
       <div className="arrow-button right-arrow" 
-        onMouseDown={onRightKeyStart} 
-        onMouseUp={onRightKeyEnd} 
-        onMouseLeave={onRightKeyEnd}
-        onTouchStart={onRightKeyStart}
-        onTouchEnd={onRightKeyEnd}
+        onMouseDown={() => { setInput("right", true); }} 
+        onMouseUp={() => { setInput("right", false); }}
+        onMouseLeave={() => { setInput("right", false); }}
+        onTouchStart={() => { setInput("right", true); }}
+        onTouchEnd={() => { setInput("right", false); }}
       >
         <img className="arrow-img" src="Images/Icons/arrow.png" alt="" />
       </div>
       <div className="arrow-button down-arrow" 
-        onMouseDown={onDownMoveStart}
-        onMouseUp={onDownMoveEnd}
-        onMouseLeave={onDownMoveEnd}
-        onTouchStart={onDownMoveStart}
-        onTouchEnd={onDownMoveEnd}
+        onMouseDown={() => { setInput("backward", true); }} 
+        onMouseUp={() => { setInput("backward", false); }}
+        onMouseLeave={() => { setInput("backward", false); }}
+        onTouchStart={() => { setInput("backward", true); }}
+        onTouchEnd={() => { setInput("backward", false); }}
       >
         <img className="arrow-img" src="Images/Icons/arrow.png" alt="" />
       </div>

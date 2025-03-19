@@ -6,13 +6,11 @@ import Player from './Player';
 import ArcadeConsole from './ArcadeConsole';
 
 interface ArcadeCanvasProps {
-  move: number;
-  rotate: number;
-  onShowGameInfoPopup: (gameId: number) => void;
+  onShowGameInfoPopup: () => void;
   onCloseGameInfoPopup: () => void;
 }
 
-const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({move, rotate, onShowGameInfoPopup, onCloseGameInfoPopup}) => {
+const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({onShowGameInfoPopup, onCloseGameInfoPopup}) => {
   const degToRad = (deg: number) => {
     return (Math.PI / 180) * deg;
   };
@@ -56,7 +54,7 @@ const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({move, rotate, onShowGameInfoP
           {drawFloor()}
           <ArcadeConsole gameId={1} pos={[0, 3, -5]} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
           <ArcadeConsole gameId={2} pos={[6, 3, -5]} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
-          <Player move={move} rotate={rotate} />
+          <Player onShowGameInfoPopup={onShowGameInfoPopup} />
         </group>
       </Physics>
     </Canvas>
