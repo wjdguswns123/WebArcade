@@ -1,4 +1,4 @@
-import { OrthographicCamera } from '@react-three/drei';
+import { ContactShadows, OrthographicCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Physics, RigidBody } from '@react-three/rapier';
 import React from 'react';
@@ -49,6 +49,7 @@ const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({onShowGameInfoPopup, onCloseG
         rotation={[0, degToRad(30), degToRad(30)]} 
         args={["#ffffff", 3]}
       />
+      <ContactShadows position={[0, -2, -0.16]} />
       <Physics>
         <group rotation={[0, 0, 0]}>
           {drawFloor()}
