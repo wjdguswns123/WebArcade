@@ -38,7 +38,7 @@ const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({onShowGameInfoPopup, onCloseG
           zoom={30}  
         />
       </group>
-      <directionalLight
+      {/* <directionalLight
         castShadow 
         shadow-camera-top={50}
         shadow-camera-bottom={-50}
@@ -47,14 +47,24 @@ const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({onShowGameInfoPopup, onCloseG
 
         position={[10, 10, 10]} 
         rotation={[0, degToRad(30), degToRad(30)]} 
-        args={["#ffffff", 3]}
-      />
+        args={["#ffffff", 7]}
+      /> */}
+      <pointLight
+        castShadow
+        shadow-camera-top={50}
+        shadow-camera-bottom={-50}
+        shadow-camera-left={-50}
+        shadow-camera-right={50}
+
+        position={[0, 20, 0]} 
+        args={["#ffffff", 2000]}
+       />
       <ContactShadows position={[0, -2, -0.16]} />
       <Physics>
         <group rotation={[0, 0, 0]}>
           {drawFloor()}
-          <ArcadeConsole gameId={1} pos={[0, 3, -5]} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
-          <ArcadeConsole gameId={2} pos={[6, 3, -5]} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
+          <ArcadeConsole gameId={1} pos={[-4, 3, -5]} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
+          <ArcadeConsole gameId={2} pos={[4, 3, -5]} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
           <Player onShowGameInfoPopup={onShowGameInfoPopup} />
         </group>
       </Physics>

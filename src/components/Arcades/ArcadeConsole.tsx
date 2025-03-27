@@ -1,7 +1,9 @@
-import { Vector3 } from '@react-three/fiber';
+import { useLoader, Vector3 } from '@react-three/fiber';
 import { CuboidCollider, RigidBody } from '@react-three/rapier';
 import React, { useEffect, useState } from 'react';
 import { useGameDataStore } from '../../stores/GameDataStore';
+import { GLTFLoader } from 'three/examples/jsm/Addons.js';
+import { Clone } from '@react-three/drei';
 
 interface ArcadeConsoleProps {
   gameId: number;
@@ -12,6 +14,8 @@ interface ArcadeConsoleProps {
 
 const ArcadeConsole:React.FC<ArcadeConsoleProps> = ({gameId, pos, onShowGameInfoPopup, onCloseGameInfoPopup}) => {
   const [isEnter, setIsEnter] = useState(false);
+
+  const model = useLoader(GLTFLoader, "Models/ArcadeConsole1/scene.gltf");
 
   const setSelectGameID = useGameDataStore(state => state.setSelectGameID);
 
@@ -50,6 +54,12 @@ const ArcadeConsole:React.FC<ArcadeConsoleProps> = ({gameId, pos, onShowGameInfo
     };
   }, [touchStart, touchEnd]);
 
+  useEffect(() => {
+      model.scene.traverse((child) => {
+        child.castShadow = true;
+    });
+    }, [model.scene]);
+
   return (
     <RigidBody type="fixed" position={pos} >
       <CuboidCollider 
@@ -59,14 +69,15 @@ const ArcadeConsole:React.FC<ArcadeConsoleProps> = ({gameId, pos, onShowGameInfo
         onIntersectionEnter={OnArcadeConsoleZoneEnter}
         onIntersectionExit={OnArcadeConsoleZoneExit}
       />
-      <mesh castShadow >
-        <boxGeometry args={[4, 6, 3]} />
-        <meshStandardMaterial color="#9BF7FF" />
-      </mesh>
+      <Clone castShadow
+         object={model.scene}
+         scale={2}
+         position-y={-3.5}
+      />
       {isEnter &&
-        <mesh position={[0, 5, 0]}>
-          <boxGeometry args={[1, 2, 1]} />
-          <meshStandardMaterial color="#FF1111" />
+        <mesh position={[0, 5.5, -1]}>
+          <sphereGeometry args={[0.5, 16, 16]} />
+          <meshBasicMaterial color="#FF1111" />
         </mesh>
       }
     </RigidBody>
