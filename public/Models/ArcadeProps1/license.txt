@@ -1,0 +1,11 @@
+Model Information:
+* title:	Astro Gents Arcade Cabinet
+* source:	https://sketchfab.com/3d-models/astro-gents-arcade-cabinet-df33ff6aa315456f83b3f0fa12a3591c
+* author:	dayrook (https://sketchfab.com/dayrook)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Astro Gents Arcade Cabinet" (https://sketchfab.com/3d-models/astro-gents-arcade-cabinet-df33ff6aa315456f83b3f0fa12a3591c) by dayrook (https://sketchfab.com/dayrook) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

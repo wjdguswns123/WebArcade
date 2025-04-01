@@ -1,0 +1,11 @@
+Model Information:
+* title:	Race Arcade Cabinet
+* source:	https://sketchfab.com/3d-models/race-arcade-cabinet-ae9637e2f7d746e2a8c623d1cd02472e
+* author:	Creator20_Guest (https://sketchfab.com/Creator20_Guest)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Race Arcade Cabinet" (https://sketchfab.com/3d-models/race-arcade-cabinet-ae9637e2f7d746e2a8c623d1cd02472e) by Creator20_Guest (https://sketchfab.com/Creator20_Guest) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

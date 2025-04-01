@@ -1,9 +1,11 @@
 import { ContactShadows, OrthographicCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { Physics, RigidBody } from '@react-three/rapier';
+import { Physics } from '@react-three/rapier';
 import React from 'react';
 import Player from './Player';
 import ArcadeConsole from './ArcadeConsole';
+import ArcadeRoom from './ArcadeRoom';
+import { degToRad } from '../../Utils/utils';
 
 interface ArcadeCanvasProps {
   onShowGameInfoPopup: () => void;
@@ -11,21 +13,6 @@ interface ArcadeCanvasProps {
 }
 
 const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({onShowGameInfoPopup, onCloseGameInfoPopup}) => {
-  const degToRad = (deg: number) => {
-    return (Math.PI / 180) * deg;
-  };
-
-  const drawFloor = () => {
-    return (
-      <RigidBody>
-        <mesh receiveShadow rotation={[degToRad(-90), 0, 0]}>
-          <planeGeometry args={[50, 50]} />
-          <meshStandardMaterial color="#7D7D7D" />
-        </mesh>
-      </RigidBody>
-    );
-  };
-
   return (
     <Canvas shadows style={{width: "100vw", height: "100vh"}}>
       {/* <axesHelper args={[10]} /> */}
@@ -56,15 +43,33 @@ const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({onShowGameInfoPopup, onCloseG
         shadow-camera-left={-50}
         shadow-camera-right={50}
 
-        position={[0, 20, 0]} 
-        args={["#ffffff", 2000]}
-       />
+        position={[0, 20, -14]} 
+        args={["#ffffff", 3000]}
+      />
+      <pointLight
+        castShadow
+        shadow-camera-top={50}
+        shadow-camera-bottom={-50}
+        shadow-camera-left={-50}
+        shadow-camera-right={50}
+
+        position={[0, 20, 14]} 
+        args={["#ffffff", 3000]}
+      />
       <ContactShadows position={[0, -2, -0.16]} />
       <Physics>
         <group rotation={[0, 0, 0]}>
-          {drawFloor()}
-          <ArcadeConsole gameId={1} pos={[-4, 3, -5]} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
-          <ArcadeConsole gameId={2} pos={[4, 3, -5]} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
+          <ArcadeRoom />
+          <ArcadeConsole gameId={1} pos={[-4, 3, -6]} modelType={1} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
+          <ArcadeConsole gameId={2} pos={[4, 3, -6]} modelType={1} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
+          <ArcadeConsole gameId={0} pos={[12, 3, -6]} modelType={1} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
+
+          <ArcadeConsole gameId={0} pos={[-13, 3, 8]} modelType={3} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
+          <ArcadeConsole gameId={0} pos={[-6, 3, 8]} modelType={3} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
+
+          <ArcadeConsole gameId={0} pos={[6, 3, 8]} modelType={2} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
+          <ArcadeConsole gameId={0} pos={[13, 3, 8]} modelType={2} onShowGameInfoPopup={onShowGameInfoPopup} onCloseGameInfoPopup={onCloseGameInfoPopup} />
+
           <Player onShowGameInfoPopup={onShowGameInfoPopup} />
         </group>
       </Physics>
