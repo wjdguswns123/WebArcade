@@ -1,11 +1,11 @@
 Model Information:
-* title:	Arcade-Plain Materials
-* source:	https://sketchfab.com/3d-models/arcade-plain-materials-f9d6b55ac2cc451ab9c15987e65074d4
-* author:	thesoooped (https://sketchfab.com/thesoooped)
+* title:	Arcade Machine
+* source:	https://sketchfab.com/3d-models/arcade-machine-77d667abc0d84faab04aba479bbd2af1
+* author:	j0el_02 (https://sketchfab.com/j0el_02)
 
 Model License:
 * license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 * requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Arcade-Plain Materials" (https://sketchfab.com/3d-models/arcade-plain-materials-f9d6b55ac2cc451ab9c15987e65074d4) by thesoooped (https://sketchfab.com/thesoooped) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+This work is based on "Arcade Machine" (https://sketchfab.com/3d-models/arcade-machine-77d667abc0d84faab04aba479bbd2af1) by j0el_02 (https://sketchfab.com/j0el_02) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

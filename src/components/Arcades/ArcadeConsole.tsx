@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useGameDataStore } from '../../stores/GameDataStore';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { Clone } from '@react-three/drei';
-import { degToRad } from '../../Utils/utils';
 
 interface ArcadeConsoleModelInfo {
   modelName: string;
@@ -28,9 +27,9 @@ const arcadeConsoleModelInfos: ArcadeConsoleModelInfo[] = [
   },
   {
     modelName: "ArcadeConsole3",
-    scale: 1,
+    scale: 70,
     positionY: -3,
-    rotationY: degToRad(20),
+    rotationY: 0,
   },
 ];
 
