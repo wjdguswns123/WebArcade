@@ -74,7 +74,7 @@ const Player:React.FC<PlayerProps> = ({onShowGameInfoPopup}) => {
   }, [model, action]);
 
   return (
-    <group position={[0, 2, 2]} >
+    <group position={[20, 2, -15]} >
       <RigidBody colliders={false} ref={playerRef} >
         <CylinderCollider args={[2, 2]} position={[0, 0, 0]} />
         <primitive castShadow

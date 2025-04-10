@@ -1,4 +1,4 @@
-.game-info-popup-background { position: fixed; top: 50px; left: 50px; width: 830px; height: 650px; background-color: #eee; border: 2px solid #333; z-index: 1; }
+.game-info-popup-background { position: fixed; top: 120px; left: 50px; width: 830px; height: 650px; background-color: #eee; border: 2px solid #333; z-index: 11; }
 
 .game-info-popup-background .title { font-size: 30px; margin: 0; padding: 20px; }
 
@@ -12,4 +12,4 @@
 
 .game-info-popup-background .screenshots img { height: 400px; padding-right: 10px; }
 
-.game-info-popup-background .start-button { display: block; margin: 20px auto; padding: 10px 40px; }
+.game-info-popup-background .start-button { display: block; margin: 20px auto; padding: 10px 40px; font-family: "DungGeunMo"; }

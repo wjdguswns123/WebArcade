@@ -7,6 +7,7 @@ import JoystickUI from './components/JoystickUI';
 import { GameInfo, getInitGameInfo, gameInfos, loadGameInfo } from './resources/gameInfo';
 import { useGameDataStore } from './stores/GameDataStore';
 import './App.css';
+import MainUI from './components/MainUI';
 
 const keyMap = [
   { name: "forward", keys: ["ArrowUp"] },
@@ -41,6 +42,7 @@ function App() {
 
   return (
     <div className="App">
+      <MainUI />
       <KeyboardControls map={keyMap}>
         <ArcadeCanvas onShowGameInfoPopup={showGameInfoPopup} onCloseGameInfoPopup={closeGameInfoPopup} />
         {isShowGameInfoPopup && 

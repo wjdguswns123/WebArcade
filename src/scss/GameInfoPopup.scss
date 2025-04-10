@@ -1,12 +1,12 @@
 .game-info-popup-background {
   position: fixed;
-  top: 50px;
+  top: 120px;
   left: 50px;
   width: 830px;
   height: 650px;
   background-color: #eee;
   border: 2px solid #333;
-  z-index: 1;
+  z-index: 11;
 
   .title {
     font-size: 30px;
@@ -53,5 +53,6 @@
     display: block;
     margin: 20px auto;
     padding: 10px 40px;
+    font-family: "DungGeunMo";
   }
 }
