@@ -26,16 +26,25 @@ const GameInfoPopup:React.FC<GameInfoPopupProps> = ({ data, onClose, onStartGame
 
   return (
     <div className="game-info-popup-background">
-      <button className="close-Button" onClick={onClose}>
-        <img src="/Images/Icons/icon_close.png" alt="" />
-      </button>
+      <div className="game-info-popup-border-pink">
+        <div className="game-info-popup-border-skyblue">
+          <div className="game-info-popup-border-stroke">
 
-      <p className="title">{data.name}</p>
-      <p className="description">{data.description}</p>
+            <button className="close-Button" onClick={onClose}>
+              <img src="/Images/Icons/icon_close.png" alt="" />
+            </button>
+
+            <p className="title">{data.name}</p>
+            <p className="description">{data.description}</p>
+            
+            {drawScreenShots()}
+            
+            <button className="start-button" onClick={onStartGame}>{"게임 시작"}</button>
+
+          </div>
+        </div>
+      </div>
       
-      {drawScreenShots()}
-      
-      <button className="start-button" onClick={onStartGame}>{"게임 시작"}</button>
     </div>
   )
 }

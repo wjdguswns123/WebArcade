@@ -25,9 +25,11 @@ function App() {
   loadGameInfo();
   
   const showGameInfoPopup = useCallback(() => {
-    const info = gameInfos.find(i => i.id === useGameDataStore.getState().selectGameID);
-    setIsShowGameInfoPopup(true);
-    setCurrentGameInfo(info ? info : getInitGameInfo);
+    if(useGameDataStore.getState().selectGameID !== 0) {
+      const info = gameInfos.find(i => i.id === useGameDataStore.getState().selectGameID);
+      setIsShowGameInfoPopup(true);
+      setCurrentGameInfo(info ? info : getInitGameInfo);
+    }
   }, []);
 
   const closeGameInfoPopup = useCallback(() => {
