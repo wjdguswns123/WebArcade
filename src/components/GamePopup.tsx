@@ -35,15 +35,23 @@ const GamePopup:React.FC<GamePopupProps> = ({data, onClose}) => {
 
   return (
     <div className="game-popup-background">
-      <button className="close-Button" onClick={() => {
-          sendMessage("GameManager", "ReceiveExitGame");
-        }}>
-        <img src="/Images/Icons/icon_close.png" alt="" />
-      </button>
-      <p className="title">{data.name}</p>
-      
-      <Unity className="game-canvas" unityProvider={unityProvider}
-        style={{ width: getWidth(), height: "80vh" }}/>
+      <div className="game-popup-border-pink">
+        <div className="game-popup-border-skyblue">
+          <div className="game-popup-border-stroke">
+
+          <button className="close-Button" onClick={() => {
+            sendMessage("GameManager", "ReceiveExitGame");
+          }}>
+            <img src="/Images/Icons/icon_close.png" alt="" />
+          </button>
+          <p className="title">{data.name}</p>
+          
+          <Unity className="game-canvas" unityProvider={unityProvider}
+            style={{ width: getWidth(), height: "80vh" }}/>
+
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

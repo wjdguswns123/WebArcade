@@ -1,7 +1,7 @@
 import { ContactShadows, OrthographicCamera } from '@react-three/drei';
 import { Canvas, Vector3 } from '@react-three/fiber';
 import { Physics } from '@react-three/rapier';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Player from './Player';
 import ArcadeConsole from './ArcadeConsole';
 import ArcadeRoom from './ArcadeRoom';
@@ -12,7 +12,11 @@ interface ArcadeCanvasProps {
   onCloseGameInfoPopup: () => void;
 }
 
+const baseWidth = 1920; // 가로 해상도 기준 값.
+
 const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({onShowGameInfoPopup, onCloseGameInfoPopup}) => {
+  const [widthRatio, setWidthRatio] = useState(1);
+
   const setPointLight = (pos: Vector3) => {
     return (
       <pointLight
@@ -28,16 +32,27 @@ const ArcadeCanvas:React.FC<ArcadeCanvasProps> = ({onShowGameInfoPopup, onCloseG
     );
   };
 
+  const resizeWindow = () => {
+    setWidthRatio(window.innerWidth / baseWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", resizeWindow);
+    return () => {
+      window.removeEventListener("resize", resizeWindow);
+    };
+  }, []);
+
   return (
     <Canvas shadows style={{width: "100vw", height: "100vh"}}>
       {/* <axesHelper args={[10]} /> */}
       <group rotation={[0, degToRad(-45), 0]}>
-        <OrthographicCamera makeDefault 
+        <OrthographicCamera makeDefault
           near={0.1} 
           far={500} 
           position={[0, 15, 20]} 
           rotation={[degToRad(-30), 0, 0]} 
-          zoom={30}  
+          zoom={30 * widthRatio}
         />
       </group>
       {/* <directionalLight

@@ -1,7 +1,7 @@
-@mixin main-border($width, $color) {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
+@import "MainUI";
+
+@mixin popup-border($width, $color) {
+  @include border-base($width, $color);
   border: $width solid $color;
 }
 
@@ -16,11 +16,11 @@
   z-index: 11;
 
   .game-info-popup-border-pink {
-    @include main-border(3px, #ffa2dc);
+    @include popup-border(3px, #ffa2dc);
   }
 
   .game-info-popup-border-skyblue {
-    @include main-border(3px, #8ad4ff);
+    @include popup-border(3px, #8ad4ff);
   }
 
   .title {

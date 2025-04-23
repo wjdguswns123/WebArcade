@@ -6,8 +6,12 @@
 
 .main-border-part .main-border-stroke { width: 100%; height: 100%; box-sizing: border-box; border-top: 5px solid #000000; }
 
-.main-border-part .main-title { position: fixed; width: 400px; height: 100px; left: 50px; top: 0; background-color: #ffffff; box-sizing: border-box; border: 4px solid #000000; border-radius: 20px; align-content: center; text-align: center; font-size: 50px; }
+.main-border-part .main-title { position: fixed; width: 24vw; height: 8vw; left: 5vw; top: 0; background-color: #ffffff; box-sizing: border-box; border: 4px solid #000000; border-radius: 20px; align-content: center; text-align: center; font-size: 3vw; }
+
+@media (max-width: 768px) { .main-border-part .main-title { width: 180px; height: 60px; font-size: 20px; } }
+
+@media (max-width: 200px) { .main-border-part .main-title { width: 90vw; font-size: 10vw; } }
 
 .main-border-part .main-title-border-pink { width: 100%; height: 100%; box-sizing: border-box; border: 6px solid #ffa2dc; border-radius: 14px; }
 
-.main-border-part .main-title-border-skyblue { width: 100%; height: 100%; padding-top: 5px; box-sizing: border-box; border: 6px solid #8ad4ff; border-radius: 8px; }
+.main-border-part .main-title-border-skyblue { width: 100%; height: 100%; padding-top: 0.8vw; box-sizing: border-box; border: 6px solid #8ad4ff; border-radius: 8px; }

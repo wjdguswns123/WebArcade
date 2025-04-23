@@ -1,3 +1,5 @@
+@import "GameInfoPopup";
+
 .game-popup-background {
   position: fixed;
   top: 120px;
@@ -5,6 +7,14 @@
   background-color: #eee;
   border: 2px solid #333;
   z-index: 11;
+
+  .game-popup-border-pink {
+    @include popup-border(3px, #ffa2dc);
+  }
+
+  .game-popup-border-skyblue {
+    @include popup-border(3px, #8ad4ff);
+  }
 
   .title {
     font-size: 30px;
