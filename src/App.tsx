@@ -48,9 +48,7 @@ function App() {
       <KeyboardControls map={keyMap}>
         <ArcadeCanvas onShowGameInfoPopup={showGameInfoPopup} onCloseGameInfoPopup={closeGameInfoPopup} />
         {isShowGameInfoPopup && 
-          <div>
-            <GameInfoPopup data={currentGameInfo} onClose={closeGameInfoPopup} onStartGame={startGame} />
-          </div>
+          <GameInfoPopup data={currentGameInfo} onClose={closeGameInfoPopup} onStartGame={startGame} />
         }
         {isPlayingGame &&
           <GamePopup data={currentGameInfo} onClose={() => {

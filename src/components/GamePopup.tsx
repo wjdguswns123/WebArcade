@@ -47,7 +47,7 @@ const GamePopup:React.FC<GamePopupProps> = ({data, onClose}) => {
           <p className="title">{data.name}</p>
           
           <Unity className="game-canvas" unityProvider={unityProvider}
-            style={{ width: getWidth(), height: "80vh" }}/>
+            style={{ width: getWidth() }} />
 
           </div>
         </div>
