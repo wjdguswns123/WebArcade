@@ -1,13 +1,13 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { KeyboardControls } from '@react-three/drei';
 import ArcadeCanvas from './components/Arcades/ArcadeCanvas';
 import GameInfoPopup from './components/GameInfoPopup';
 import GamePopup from './components/GamePopup';
 import JoystickUI from './components/JoystickUI';
+import MainUI from './components/MainUI';
 import { GameInfo, getInitGameInfo, gameInfos, loadGameInfo } from './resources/gameInfo';
 import { useGameDataStore } from './stores/GameDataStore';
 import './App.css';
-import MainUI from './components/MainUI';
 
 const keyMap = [
   { name: "forward", keys: ["ArrowUp"] },
