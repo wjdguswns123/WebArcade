@@ -1,24 +1,27 @@
-import { useAnimations, useKeyboardControls } from '@react-three/drei';
+import { OrthographicCamera, useAnimations, useKeyboardControls } from '@react-three/drei';
 import { useFrame, useLoader } from '@react-three/fiber';
 import { CylinderCollider, RapierRigidBody, RigidBody } from '@react-three/rapier';
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { InputTypes, useInputStateStore } from '../../stores/InputStateStore';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
+import { degToRad } from '../../Utils/utils';
 
 interface PlayerProps {
+  widthRatio: number;
   onShowGameInfoPopup: () => void;
 }
 
 const MOVE_SPEED = 7;
 const ROTATE_SPEED = 5;
 
-const Player:React.FC<PlayerProps> = ({onShowGameInfoPopup}) => {
+const Player:React.FC<PlayerProps> = ({widthRatio, onShowGameInfoPopup}) => {
   const [action, setAction] = useState("Idle");
   const model = useLoader(GLTFLoader, "Models/Character/scene.gltf");
   const animations = useAnimations(model.animations, model.scene);
 
-  const playerRef = useRef<RapierRigidBody>(null);
+  const playerGroupRef = useRef<THREE.Group>(null);
+  const playerRigidBodyRef = useRef<RapierRigidBody>(null);  
 
   const [sub] = useKeyboardControls<InputTypes>();
 
@@ -32,14 +35,14 @@ const Player:React.FC<PlayerProps> = ({onShowGameInfoPopup}) => {
   };
 
   useFrame(() => {
-    if(playerRef && playerRef.current) {
+    if(playerGroupRef && playerGroupRef.current && playerRigidBodyRef && playerRigidBodyRef.current) {
       const moveValue = (forward ? 1 : 0) + (backward ? -1 : 0);
       const rotateValue = (left ? 1 : 0) + (right ? -1 : 0);
 
-      const direction = new THREE.Vector3(0, 0, 1).applyQuaternion(playerRef.current.rotation());
+      const direction = new THREE.Vector3(0, 0, 1).applyEuler(playerGroupRef.current.rotation);
 
-      playerRef.current.setAngvel(new THREE.Vector3(0, rotateValue * ROTATE_SPEED, 0), true);
-      playerRef.current.setLinvel(new THREE.Vector3(direction.x * moveValue * MOVE_SPEED, 0, direction.z * moveValue * MOVE_SPEED), true);
+      playerGroupRef.current.rotateOnAxis(new THREE.Vector3(0, 1, 0), rotateValue * ROTATE_SPEED * 0.01)
+      playerRigidBodyRef.current.setLinvel(new THREE.Vector3(direction.x * moveValue * MOVE_SPEED, 0, direction.z * moveValue * MOVE_SPEED), true);
 
       if((moveValue === 1 || moveValue === -1) && action !== "Walk") setAction("Walk");
       if((moveValue === 0) && action !== "Idle") setAction("Idle");
@@ -75,13 +78,26 @@ const Player:React.FC<PlayerProps> = ({onShowGameInfoPopup}) => {
 
   return (
     <group position={[20, 2, -15]} >
-      <RigidBody colliders={false} ref={playerRef} >
-        <CylinderCollider args={[2, 2]} position={[0, 0, 0]} />
-        <primitive castShadow
-          object={model.scene}
-          scale={2}
-          position-y={-2}
-        />
+      <RigidBody colliders={false} ref={playerRigidBodyRef}>
+        
+        <group position={[-25, 25, 25]} rotation={[0, degToRad(-45), 0]} >
+          <OrthographicCamera makeDefault
+            near={0.1} 
+            far={500}
+            rotation={[degToRad(-30), 0, 0]} 
+            zoom={30 * widthRatio}
+          />
+        </group>
+
+        <group ref={playerGroupRef} >
+          <CylinderCollider args={[2, 2]} position={[0, 0, 0]} />
+          <primitive castShadow
+            object={model.scene}
+            scale={2}
+            position-y={-2}
+          />
+        </group>
+        
       </RigidBody>
     </group>
   );

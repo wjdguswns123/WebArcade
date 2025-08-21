@@ -14,7 +14,7 @@ const JoystickUI = () => {
         onTouchStart={() => { setInput("forward", true); }}
         onTouchEnd={() => { setInput("forward", false); }}
       >
-        <img className="arrow-img" src="Images/Icons/arrow.png" alt="" />
+        <img className="arrow-img" src="Images/Icons/arrow.png" alt="" onContextMenu={(e) => e.preventDefault()} />
       </div>
       <div className="arrow-button left-arrow" 
         onMouseDown={() => { setInput("left", true); }} 
@@ -23,7 +23,7 @@ const JoystickUI = () => {
         onTouchStart={() => { setInput("left", true); }}
         onTouchEnd={() => { setInput("left", false); }}
       >
-        <img className="arrow-img" src="Images/Icons/arrow.png" alt="" />
+        <img className="arrow-img" src="Images/Icons/arrow.png" alt="" onContextMenu={(e) => e.preventDefault()} />
       </div>
       <div className="arrow-button right-arrow" 
         onMouseDown={() => { setInput("right", true); }} 
@@ -32,7 +32,7 @@ const JoystickUI = () => {
         onTouchStart={() => { setInput("right", true); }}
         onTouchEnd={() => { setInput("right", false); }}
       >
-        <img className="arrow-img" src="Images/Icons/arrow.png" alt="" />
+        <img className="arrow-img" src="Images/Icons/arrow.png" alt="" onContextMenu={(e) => e.preventDefault()} />
       </div>
       <div className="arrow-button down-arrow" 
         onMouseDown={() => { setInput("backward", true); }} 
@@ -41,7 +41,7 @@ const JoystickUI = () => {
         onTouchStart={() => { setInput("backward", true); }}
         onTouchEnd={() => { setInput("backward", false); }}
       >
-        <img className="arrow-img" src="Images/Icons/arrow.png" alt="" />
+        <img className="arrow-img" src="Images/Icons/arrow.png" alt="" onContextMenu={(e) => e.preventDefault()} />
       </div>
     </div>
   )
