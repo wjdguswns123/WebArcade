@@ -1,58 +1,55 @@
-import React, { useEffect } from 'react';
-import { Unity, useUnityContext } from "react-unity-webgl";
-import { GameInfo } from "../resources/gameInfo";
+import React, { useRef, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { useGameDataStore } from '../stores/GameDataStore';
+import GamePopupContent from '../components/GamePopupContent';
 import '../css/GamePopup.css';
 
 interface GamePopupProps {
-  data: GameInfo;
+  isShow: boolean;
   onClose: () => void;
 }
 
-const GamePopup:React.FC<GamePopupProps> = ({data, onClose}) => {
-  const { unityProvider, sendMessage, addEventListener, removeEventListener } = useUnityContext({
-    loaderUrl: `${data.buildPath}.loader.js`,
-    dataUrl: `${data.buildPath}.data.unityweb`,
-    frameworkUrl: `${data.buildPath}.framework.js.unityweb`,
-    codeUrl: `${data.buildPath}.wasm.unityweb`,
-  });
+const GamePopup:React.FC<GamePopupProps> = ({isShow, onClose}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const exitGame = () => {
-    onClose();
-  };
+  const nodeRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    addEventListener("CloseGamePopup", exitGame);
-
-    return () => {
-      removeEventListener("CloseGamePopup", exitGame);
-    };
-  }, [addEventListener, removeEventListener, exitGame]);
-
-  const getWidth = () => {
-    const width = data.isLandscape ? 80 * 1.78 : 80 * 0.5625;
-    return `${width}vh`;
-  };
+  const gameData = useGameDataStore.getState().selectGameInfo;
 
   return (
-    <div className="game-popup-background">
-      <div className="game-popup-border-pink">
-        <div className="game-popup-border-skyblue">
-          <div className="game-popup-border-stroke">
+    <CSSTransition
+      nodeRef={nodeRef}
+      in={isShow}
+      timeout={300}
 
-          <button className="close-Button" onClick={() => {
-            sendMessage("GameManager", "ReceiveExitGame");
-          }}>
-            <img src="/Images/Icons/icon_close.png" alt="" />
-          </button>
-          <p className="title">{data.name}</p>
-          
-          <Unity className="game-canvas" unityProvider={unityProvider}
-            style={{ width: getWidth() }} />
+      classNames={{
+        enter: "",
+        enterActive: "popupOpen",
+        exit: "",
+        exitActive: "popupClose",
+        appear: "",
+        appearActive: "",
+      }}
 
+      onEntering={() => {
+        setIsLoaded(true);
+      }}
+      mountOnEnter
+      unmountOnExit
+    >
+      <div className="game-popup-background" ref={nodeRef}>
+        <div className="game-popup-border-pink">
+          <div className="game-popup-border-skyblue">
+            <div className="game-popup-border-stroke">
+            
+            {isLoaded && <GamePopupContent gameData={gameData} onClose={onClose} />};
+
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </CSSTransition>
+    
   )
 }
 

@@ -1,9 +1,4 @@
-@import "MainUI";
-
-@mixin popup-border($width, $color) {
-  @include border-base($width, $color);
-  border: $width solid $color;
-}
+@import "Popup";
 
 .game-info-popup-background {
   position: absolute;

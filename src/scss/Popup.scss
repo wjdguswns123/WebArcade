@@ -1,0 +1,56 @@
+@import "Border";
+
+@mixin popup-border($width, $color) {
+  @include border-base($width, $color);
+  border: $width solid $color;
+}
+
+@mixin popupAnimation($animation) {
+  animation: $animation 0.3s ease-out forwards;
+}
+
+.popupOpen {
+  @include popupAnimation(openPopup);
+}
+
+.popupClose {
+  @include popupAnimation(closePopup);
+}
+
+@keyframes openPopup {
+  0% {
+    scale: 0;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  80% {
+    scale: 1.2;
+  }
+
+  100% {
+    scale: 1;
+  }
+}
+
+@keyframes closePopup {
+  0% {
+    scale: 1;
+    opacity: 1;
+  }
+
+  20% {
+    scale: 1.2;
+  }
+
+  70% {
+    opacity: 0;
+  }
+
+  100% {
+    scale: 0;
+  }
+}
