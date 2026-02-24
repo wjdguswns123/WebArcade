@@ -1,52 +1,78 @@
 .joystick {
   position: absolute;
-  right: 40px;
-  bottom: 40px;
-  z-index: 12;
+  right: 80px;
+  bottom: 80px;
+  width: 200px;
+  height: 200px;
 
-  .arrow-button {
-    width: 50px;
-    height: 40px;
-    border: 3px solid #000;
-    border-radius: 3px;
-    text-align: center;
-    align-content: center;
+  @mixin circle($bgColor, $radius) {
+    width: $radius;
+    height: $radius;
+    background-color: $bgColor;
+    border: 4px solid #000;
+    box-sizing: border-box;
+    border-radius: 50%;
+  }
+
+  .area {
+    @include circle(#52525246, 100%);
+  }
+
+  .knob {
     position: absolute;
-    cursor: pointer;
 
-    &:active {
-      background-color: #aaaaaa;
-      transform: scale(1.1);      
-      transition: transform 0.1s;
-    }
+    $radius: 50px;
 
-    @mixin arrow-image($deg) {
-      .arrow-img {
-        width: 80%;
-        height: 80%;
-        transform: rotateZ($deg);
-      }
-    }
+    left: calc(50% - #{$radius / 2});
+    top: calc(50% - #{$radius / 2});
+
+    z-index: 12;
+
+    @include circle(#646464a9, 50px);
+  }
+
+  .arrow-img {
+    $width: 50px;
+    $height: 50px;
+
+    width: $width;
+    height: $height;
+    position: absolute;
+
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+    filter: invert(1);
 
     &.up-arrow {
-      right: 70px;
-      bottom: 60px;
-      @include arrow-image(0deg);
+      right: calc(50% - #{$width / 2});
+      bottom: calc(50% - #{$height / 2} + 70px);
+      transform: rotateZ(0deg);
     }
+
     &.left-arrow {
-      right: 130px;
-      bottom: 10px;
-      @include arrow-image(270deg);
+      right: calc(50% - #{$width / 2} + 70px);
+      bottom: calc(50% - #{$height / 2});
+      transform: rotateZ(270deg);
     }
+
     &.right-arrow {
-      right: 10px;
-      bottom: 10px;
-      @include arrow-image(90deg);
+      right: calc(50% - #{$width / 2} - 70px);
+      bottom: calc(50% - #{$height / 2});
+      transform: rotateZ(90deg);
     }
+
     &.down-arrow {
-      right: 70px;
-      bottom: 10px;
-      @include arrow-image(180deg);
+      right: calc(50% - #{$width / 2});
+      bottom: calc(50% - #{$height / 2} - 70px);
+      transform: rotateZ(180deg);
     }
   }
 }
